@@ -1,0 +1,99 @@
+
+<ion-content [fullscreen]="true">
+   <ion-grid>
+      <ion-row>
+         <ion-col size="auto"></ion-col>
+         <ion-col>
+            <img src="assets/images/logo.png" alt="">
+         </ion-col>
+         <ion-col size="auto"></ion-col>
+      </ion-row>
+      <ion-row>
+         <ion-col></ion-col>
+         <ion-col>
+            <h1 style="color:#fc5d5d;font-weight:1000">INSCRIPTION</h1>
+         </ion-col>
+         <ion-col></ion-col>
+      </ion-row>
+      <ion-row>
+         <ion-col>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+               <div class="row" style="margin:10px">
+                  <div class="col-sm-12">
+                     <label for="">Nom:</label>
+                     <div class="form-group">
+                        <i class="fa fa-user form-control-icon"></i>
+                        <input type="text" formControlName="nom" [ngClass]="{ 'is-invalid': submitted && f['nom'].errors }"  class="form-control shadow-sm" placeholder="Entrez votre nom">
+                        <div *ngIf="submitted && f['nom'].errors" class="invalid-feedback">
+                          <div *ngIf="f['nom'].errors['required']">Nom is required</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <label for="">Prénom:</label>
+                    <div class="form-group">
+                       <i class="fa fa-user form-control-icon"></i>
+                       <input type="text" formControlName="prenom" [ngClass]="{ 'is-invalid': submitted && f['prenom'].errors }" class="form-control shadow-sm" placeholder="Entrez votre prénom">
+                       <div *ngIf="submitted && f['prenom'].errors" class="invalid-feedback">
+                        <div *ngIf="f['prenom'].errors['required']">Prénom is required</div>
+                      </div>
+                    </div>
+                 </div>
+                 <div class="col-sm-12">
+                    <label for="">N° téléphone:</label>
+                    <div class="form-group">
+                      <i class="fa fa-id-badge form-control-icon"></i>
+                      <input type="number" formControlName="numero_telephone"  [ngClass]="{ 'is-invalid': submitted && f['numero_telephone'].errors }" class="form-control shadow-sm" placeholder="N° portable">
+                      <div *ngIf="submitted && f['numero_telephone'].errors" class="invalid-feedback">
+                        <div *ngIf="f['numero_telephone'].errors['required']">N° telephone is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                     <label for="">Mot de passe:</label>
+                     <div class="form-group">
+                        <i class="fa fa-lock form-control-icon"></i>
+                        <input type="password" formControlName="mot_de_passe"  [ngClass]="{ 'is-invalid': submitted && f['mot_de_passe'].errors }" class="form-control shadow-sm" placeholder="Entrez mot.passe">
+                        <div *ngIf="submitted && f['mot_de_passe'].errors" class="invalid-feedback">
+                          <div *ngIf="f['mot_de_passe'].errors['required']">Mot de passe is required</div>
+                          <div *ngIf="f['mot_de_passe'].errors['minlength']">
+                            Mot de passe must be at least 6 characters
+                          </div>
+                          <div *ngIf="f['mot_de_passe'].errors['maxlength']">
+                            Mot de passe must not exceed 40 characters
+                          </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <label for="">Répetez mot de passe:</label>
+                    <div class="form-group">
+                       <i class="fa fa-lock form-control-icon"></i>
+                       <input type="password" formControlName="confirm_password"  [ngClass]="{ 'is-invalid': submitted && f['confirm_password'].errors }" class="form-control shadow-sm" placeholder="Répétez mot.passe">
+                       <div *ngIf="submitted && f['confirm_password'].errors" class="invalid-feedback">
+                        <div *ngIf="f['confirm_password'].errors['required']">Confirmez le mot de passe</div>
+                      </div>
+                    </div><br>
+                 </div>
+                 <div class="col-sm-12">
+                   <div class="form-group">
+                      <input type="checkbox" formControlName="acceptCondition" [ngClass]="{ 'is-invalid': submitted && f['acceptCondition'].errors }"><label for="" style="color:#fc5d5d"> J'accepte les conditions d'utilisations</label>
+                      <div *ngIf="submitted && f['acceptCondition'].errors" class="invalid-feedback">
+                        Accept Terms is required
+                      </div>
+                   </div>
+                    <p style="color:#666">Deja menbre?<a routerLink="/login">connectez vous</a></p>
+                 </div>
+                 <div class="col-sm-12">
+                    <app-alert></app-alert>
+                 </div>
+                 <div class="col-sm-12">
+                    <button class="btn btn-danger shadow-lg btn-lg btn-block" style="width: 100%;border-radius:20px" type="submit" [disabled]="registrationInProgress"><span *ngIf="!registrationInProgress">VALIDER MON INSCRIPTION </span><ion-spinner *ngIf="registrationInProgress" style="color:white"></ion-spinner></button>
+                 </div>
+               </div>
+            </form>
+         </ion-col>
+      </ion-row>
+   </ion-grid>
+
+</ion-content>

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "etickets-app": {
+      "hosting": {
+        "app": [
+          "etickets-app"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "etickets-app"
+  }
+}

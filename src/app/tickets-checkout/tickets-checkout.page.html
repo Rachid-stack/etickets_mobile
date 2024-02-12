@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Verification ticket</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="card shadow-sm" style="border-radius:20px">
+          <div class="card-body">
+            <ion-grid>
+              <ion-row>
+                <ion-col><span style="color:#666;font-weight: bold;font-size:25px">Compagnie:</span></ion-col>
+                <ion-col></ion-col>
+                <ion-col><span style="color:red;font-weight:bold;font-size:25px">Rahimo</span></ion-col>
+              </ion-row>
+              <ion-row>
+                 <ion-col style="text-align: center;"><span style="color:black;font-weight: bold;font-size:18px">OUAGADOUGOU</span> <ion-icon size="large" color="danger" name="swap-horizontal-outline"></ion-icon><span style="color:black;font-weight:bold;font-size:18px">BOBO-DIOULASSO</span> </ion-col>
+              </ion-row>
+              <ion-row>
+                 <ion-col style="text-align: center;"><span style="color:#666;font-weight: bold;">Date</span><br><span style="color:black;font-weight:bold">23/032023</span></ion-col>
+                 <ion-col style="text-align: center;"><span style="color:#666;font-weight: bold;">Heure</span><br><span style="color:black;font-weight:bold">08:00</span></ion-col>
+                 <ion-col style="text-align: center;"><span style="color:#666;font-weight: bold;">Gare</span><br><span style="color:black;font-weight:bold">Goughin</span></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col><span style="font-weight: bold;color:#666">Numero ticket</span></ion-col>
+                 <ion-col></ion-col>
+                <ion-col style="text-align:center"><span style="color:black;font-weight: bold;">000001</span></ion-col>
+              </ion-row>
+              <ion-row>
+                 <ion-col><span style="font-weight: bold;color:#666">Type ticket</span></ion-col>
+                 <ion-col></ion-col>
+                 <ion-col style="text-align:center"><span style="color:black;font-weight: bold;">Aller simple</span></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col><span style="font-weight: bold;color:#666">Passager</span></ion-col>
+               
+                <ion-col style="text-align:center"><span style="color:black;font-weight: bold;">Ouattara  Sie Abdoul rachid</span></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col><span style="font-weight: bold;color:#666">Siége</span></ion-col>
+                <ion-col></ion-col>
+                <ion-col style="text-align:center"><span style="color:black;font-weight: bold;">26</span></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col><span style="font-weight: bold;color:#666">Téléphone</span></ion-col>
+                 <ion-col></ion-col>
+                <ion-col style="text-align:center"><span style="color:black;font-weight: bold;">55531985</span></ion-col>
+              </ion-row>
+
+              <ion-row>
+              <ion-col><span style="font-weight: bold;color:#666">Nombre place</span></ion-col>
+                  <ion-col></ion-col>
+                  <ion-col style="text-align:center"><span style="color:black;font-weight: bold;">2</span></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col><span style="font-weight: bold;color:#666">Class</span></ion-col>
+                    <ion-col></ion-col>
+                    <ion-col style="text-align:center"><span style="color:black;font-weight: bold;">VIP</span></ion-col>
+              </ion-row>
+
+            </ion-grid>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="card shadow-lg" style="border:solid 1px black;border-radius:20px">
+           <div class="card-body">
+             <qrcode [qrdata]="generateQRCode()" [width]="350" [errorCorrectionLevel]="'M'"></qrcode>
+           </div>
+        </div>
+      </ion-col>
+   </ion-row>
+  </ion-grid>
+</ion-content>

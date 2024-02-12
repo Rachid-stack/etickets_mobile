@@ -1,0 +1,7 @@
+{
+  "name": "eTickets_mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

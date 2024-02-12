@@ -1,0 +1,163 @@
+<ion-header [translucent]="true">
+    <ion-toolbar *ngIf="!isEmpty;else otherTemplate">
+      <ion-buttons slot="start">
+        <ion-button (click)="initEmpty()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+      </ion-buttons>
+      <span style="font-weight:700;">Départ : <span style="color:blue">{{compagnie[0].libelle}}:</span><span> {{ville_depart[0].libelle}}</span><ion-icon name="swap-horizontal-outline" color="danger"></ion-icon><span>{{ville_destination[0].libelle}}</span></span>
+    </ion-toolbar>
+    <ng-template #otherTemplate>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button><span style="font-weight:1000;font-size:20px"><span style="color:#666">e</span><span style="color:red">Tickets</span></span></ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button><span><ion-icon name="notifications-outline" size="large" style="color:#666;"></ion-icon></span></ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ng-template>
+</ion-header>
+<ion-content>
+  <ion-grid *ngIf="!hide">
+    <ion-row>
+      <ion-col>
+        <h1 style="color:#666;font-weight:1000;font-size:40px">Bonjour</h1>
+        <span style="color:#666">Ou souhaitez vous aller aujourd'hui ?</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+          <div class="card"  style="border-radius:10px">
+            <div class="card-body">
+              <div class="row space-top1">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend" >
+                        <span class="input-group-text"  id="basic-addon1"><ion-icon name="bus" ></ion-icon> Compagnie</span>
+                      </div>
+                      <select formControlName="compagnie" class="form-control" aria-describedby="basic-addon1">
+                        <option value="">...</option>
+                        <option *ngFor="let e of compagnies" value="{{e.id}}">{{e.libelle}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col>
+                        <div class="form-group">
+                        
+                            <label for="">Départ:</label>
+                            <select formControlName="depart" class="form-control">
+                              <option value="">...</option>
+                              <option  *ngFor="let v of villes" value="{{v.id}}">{{v.libelle}}</option>
+                              
+                            </select>
+                          
+                        </div>
+                      </ion-col>
+                      <ion-col size="auto"><br><ion-icon name="swap-horizontal-outline" size="large"></ion-icon></ion-col>
+                      <ion-col>
+                        <div class="form-group">
+                            <label for="">Destination:</label>
+                            <select formControlName="destination" class="form-control" >
+                              <option value="">...</option>
+                              <option *ngFor="let t of filteredVille" value="{{t.id}}">{{t.libelle}}</option>
+                            </select>
+                        
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                  
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend" >
+                        <span class="input-group-text"  id="basic-addon3"><ion-icon name="pin" ></ion-icon> Gare départ</span>
+                      </div>
+                      <select formControlName="gare_depart" class="form-control" aria-describedby="basic-addon3">
+                        <option value="">...</option>
+                        <option *ngFor="let g of gares" value="{{g.id}}">{{g.libelle}}</option>
+                      
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend" >
+                        <span class="input-group-text" id="basic-addon3"><ion-icon name="calendar-outline"></ion-icon> Date départ</span>
+                      </div>
+                      <input type="date" class="form-control" formControlName="date_depart" value="26/01/2021">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group" >
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend" >
+                        <span class="input-group-text" style="font-size:14px" id="basic-addon3"><ion-icon name="add-circle" size="large"></ion-icon>Réserver pour votre retour(Optionnel)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <ion-checkbox labelPlacement="end" formControlName="isTiersChecked">Réservé pour un tiers</ion-checkbox>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <button class="btn btn-danger shadow-lg btn-lg btn-block" style="width: 100%;border-radius:20px" type="submit" [disabled]="searchInProgress" ><span *ngIf="!searchInProgress">RECHERCHE DE DEPARTS</span><ion-spinner *ngIf="searchInProgress" style="color:white"></ion-spinner></button>
+                </div>
+              </div>
+            </div>
+        </div>
+      </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!isEmpty">
+    <ion-row>
+      <ion-col>
+         <div class="card">
+           <div class="card-body">
+              <h1 style="color:#666;font-weight:1000">Départ Disponible <img src="assets/icon/1F447_color.png" width="50" height="50" alt=""><img src="assets/icon/1F447_color.png" width="50" height="50" alt=""><img src="assets/icon/1F447_color.png" width="50" height="50" alt=""></h1>
+           </div>
+         </div>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col *ngIf="searchResult_;else emptyTemp">
+        <div class="card shadow-sm"  *ngFor="let result of searchResult_" style="border-radius:30px;margin-bottom:5px">
+          <div class="card-body" style="margin:1px;">
+            <span style="font-weight:700;color:#666">Départ ordinaire:</span><span style="font-weight:700;color:red">{{result.heure_depart}}</span>
+            <span style="padding-left:70px;font-weight:700;color:#666">Prix:<span style="color:red">{{result.prix_billet}}</span>fcfa</span><br>
+            <span style="font-weight:700;font-size:15px;padding-left:45px">{{ville_depart[0].libelle}}<ion-icon name="swap-horizontal-outline" size="large" color="primary"></ion-icon> {{ville_destination[0].libelle}}</span><br>
+            <span style="color:#666">estimation arrivé: <span style="color:white;font-weight:700;background-color:black;" class="badge">{{result.duree_voyage}}</span>h</span>
+            <span class="float-end">Places dispo.: <span class="badge" style="color:white;font-weight:700;background-color:black;font-size:15px">{{result.nbre_place}}</span></span><br>
+            <a style="font-weight:1000;color:darkorange" class="btn btn-outline-warning" routerLink="/seat-choose/{{result.id}}">Reserver>>></a>
+          </div>
+        </div>
+      </ion-col>
+      <ng-template #emptyTemp>
+        <ion-col>
+           <div class="card shadow-sm" style="border-radius: 30px;border-color:red;background-color: #faafaf;">
+              <div class="card-body" style="text-align:center">
+                <img src="assets/icon/1F61F_color.png" width="100" height="100">
+                <p style="color:white">Aucun Départ trouvé!!!</p>
+              </div>
+           </div>
+        </ion-col>
+      </ng-template>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+  

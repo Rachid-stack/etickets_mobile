@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>Information tiers</ion-title>
+  </ion-toolbar>
+</ion-header><br>
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+        <ion-col>
+          <div class="card" style="border-radius:30px">
+             <div class="card-body">
+                <span style="font-weight:bold;color:black;font-size:18px">Remplir les informations du tiers</span>
+                <ion-row>
+                  <ion-col>
+                     <div class="form-group">
+                        <label for="nom" style="color:#666">Nom:</label>
+                        <input type="text" name="nom" class="form-control">
+                     </div>
+                  </ion-col>
+                  <ion-col>
+                    <div class="form-group">
+                      <label for="nom" style="color:#666">Prenom:</label>
+                      <input type="text" name="prenom" class="form-control">
+                    </div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                   <ion-col>
+                    <div class="form-group">
+                      <label for="nom"style="color:#666">Telephone</label>
+                      <input type="text" name="telephone" class="form-control">
+                   </div>
+                   </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <div class="form-group" >
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend" >
+                          <span class="input-group-text" style="font-size:14px" id="basic-addon3"><ion-icon name="add-circle" size="large"></ion-icon>Réserver pour un autre tiers(Optionnel)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </ion-col>
+                </ion-row>
+             </div>
+          </div>
+        </ion-col>
+    </ion-row>
+  </ion-grid><br>
+  <ion-grid>
+    <ion-row>
+        <ion-col>
+          <div class="card" style="border-radius:30px">
+             <div class="card-body">
+                <span style="font-weight:bold;color:black;font-size:18px">Recapitulatif Réservations</span>
+                <ion-row>
+                  <ion-col>
+                     <span style="font-weight:bold;color:#666">Nom passager</span><br><span style="font-weight:bold;color:black">Ouattara rachid</span>
+                  </ion-col>
+                  <ion-col>
+                     <span style="font-weight:bold;color:#666">Nbre de tickets</span><br><span style="font-weight:bold;color:black">3</span>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                   <ion-col>
+                      <span style="font-weight:bold;color:#666">Prix tickets</span><br><span style="font-weight:bold;color:black" *ngFor="let f of depart">{{f.prix_billet}} fcfa</span>
+                   </ion-col>
+                   <ion-col>
+                    <span style="font-weight:bold;color:#666">Prix total</span><br><span style="font-weight:bold;color:black">15000 fcfa</span>
+                 </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col></ion-col>
+                  <ion-col></ion-col>
+                  <ion-col><button class="btn btn-danger">Confirmer</button></ion-col>
+               </ion-row>
+             </div>
+          </div>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

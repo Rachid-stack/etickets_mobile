@@ -1,0 +1,64 @@
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+      <ion-row>
+        <ion-col size="auto"></ion-col>
+        <ion-col>
+          <img src="assets/images/logo.png" alt="" >
+        </ion-col>
+        <ion-col size="auto"></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+          <h1 style="color:#fc5d5d;font-weight:1000">CONNECTION</h1>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="row" style="margin:10px">
+               <div class="col-sm-12">
+                 <label for="">N° téléphone:</label>
+                 <div class="form-group">
+                   <i class="fa fa-id-badge form-control-icon"></i>
+                   <input type="text" formControlName="identifiant"  [ngClass]="{ 'is-invalid': submitted && f['identifiant'].errors }" class="form-control shadow-sm" placeholder="N° portable">
+                   <div *ngIf="submitted && f['identifiant'].errors" class="invalid-feedback">
+                     <div *ngIf="f['identifiant'].errors['required']">N° telephone is required</div>
+                   </div>
+                 </div>
+               </div>
+               <div class="col-sm-12">
+                 <label for="">Mot de passe:</label>
+                 <div class="form-group">
+                    <i class="fa fa-lock form-control-icon"></i>
+                    <input type="password" formControlName="password"  [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" class="form-control shadow-sm" placeholder="Entrez mot.passe">
+                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                      <div *ngIf="f['password'].errors['required']">Mot de passe is required</div>
+                      <div *ngIf="f['password'].errors['minlength']">
+                        Mot de passe must be at least 6 characters
+                      </div>
+                      <div *ngIf="f['password'].errors['maxlength']">
+                        Mot de passe must not exceed 40 characters
+                      </div>
+                    </div>
+                 </div>
+              </div>
+              <div class="col-sm-12">
+                 <p style="color:#666">Pas de compte?<a routerLink="/inscription">Inscrivez vous</a></p>
+              </div>
+               <div class="col-sm-12" *ngIf="isError">
+                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                   Echec de connexion ! Vérifiez votre mot de passe ou votre numero de téléphone.<ion-icon name="happy-outline"></ion-icon>
+                 </div>
+               </div>
+               <div class="col-sm-12 float-bottom">
+                   <button class="btn btn-danger shadow-lg btn-lg btn-block" style="width: 100%;border-radius:20px" type="submit"  [disabled]="loginInProgress"><span *ngIf="!loginInProgress">CONNECTION</span><ion-spinner *ngIf="loginInProgress" style="color:white"></ion-spinner></button>
+               </div>
+            </div>
+          </form>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>

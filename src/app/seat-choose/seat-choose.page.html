@@ -1,0 +1,91 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>Selectionnez une chaise</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" style="background-color: #ddd;">
+<!--The content below is only a placeholder and can be replaced.-->
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <div class="card shadow-sm" style="border-radius:30px;border:solid 1px #666">
+        <ion-grid *ngFor="let seatrow of filteredSeatmap" >
+          <ion-row>
+            <ion-col>
+              <span *ngIf="seatChartConfig.showRowWisePricing && seatrow.seatPricingInformation != ''">{{seatrow.seatPricingInformation}}</span>
+              <div class="seatrow container">
+                  <div *ngIf="seatChartConfig.showRowsLabel">
+                      <div class="row-label" >  {{seatrow.seatRowLabel}} </div>
+                  </div>
+                  <div *ngFor="let seatobj of seatrow.seats">
+                      <div class="seat-item seat-space" style="color:white ; background-color:white" *ngIf="seatobj.seatLabel == ''">  &nbsp; </div>
+                      <div  placement="top"
+                      [ngClass]="{ 'seat-item' : true , 'seat-available' : seatobj.status == 'available' ,'seat-booked' : seatobj.status == 'booked' ,'seat-unavailable' : seatobj.status == 'unavailable' }" 
+                       (click)="selectSeat(seatobj)" *ngIf="(seatobj.status == 'available' || seatobj.status == 'booked' )&& seatobj.seatLabel != ''">{{seatobj.seatNo}}</div>
+                       
+                      <div tooltip="Seat not available" placement="top"
+                      [ngClass]="{ 'seat-item' : true , 'seat-unavailable' : true }" 
+                      *ngIf="seatobj.status == 'unavailable' && seatobj.seatLabel != ''">{{seatobj.seatNo}}</div>
+                  </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <div class="card shadow-sm" style="border-radius: 30px;">
+         <div class="card-body">
+            <ion-grid>
+               <ion-col><span class="badge" style="background-color: black;font-size:13px">Déja Réservé</span></ion-col>
+               <ion-col><span class="badge" style="color:#737171;border:solid 2px #ddd;font-size:13px">Disponibe</span></ion-col>
+               <ion-col><span class="badge" style="background-color:#9c9b9b;font-size:13px">Siége Choisie<br></span></ion-col>
+            </ion-grid>
+         </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <div class="card shadow-sm" style="border-radius: 30px;">
+         <div class="card-body">
+            <ion-grid>
+              <ion-row>
+                <ion-col><span style="font-weight:1000;color:#666">Prix ticket: <br><span style="color:rgb(53, 52, 52)" *ngFor="let d of departData">{{d.prix_billet}}</span> fcfa </span></ion-col>
+                <ion-col><span style="font-weight:1000;color:#666">Prix Total: <br><span style="color:rgb(53, 52, 52)" *ngFor="let d of departData">{{ d.prix_billet*cart.selectedSeats.length }}</span> fcfa </span></ion-col>
+                <ion-col><span style="font-weight:1000;color:#666">Chaise: <br><span style="color:rgb(53, 52, 52)">{{ cart.selectedSeats.length }}</span> </span></ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-grid>
+              <ion-row>
+                 <ion-col><span style="font-weight:700;font-size:15px;" *ngFor="let g of departData"><span *ngFor="let v of villes"><span *ngIf="v.id==g.trajet.depart_id">{{v.libelle}}</span></span></span><ion-icon name="swap-horizontal-outline" size="large" color="primary"></ion-icon><span style="font-weight:700;font-size:17px;" *ngFor="let g of departData"><span *ngFor="let v of villes"><span *ngIf="v.id==g.trajet.arrive_id">{{v.libelle}}</span></span></span></ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-grid>
+              <ion-row>
+                <ion-col><span style="font-weight:1000;color:#666">Passager: <span style="color:rgb(53, 52, 52)" *ngIf="userData && searchData"><span *ngIf="searchData.isTiersChecked;else name">Tiers</span> <ng-template #name><span>{{userData.nom}} {{userData.prenom}}</span></ng-template> </span> </span></ion-col>
+                <ion-col></ion-col>
+                <ion-col>
+                  <button [disabled]="cart.selectedSeats.length == 1" type="button" (click)="processBooking()" class="btn btn-danger d-grid gap-2" mdbWavesEffect>Réserver</button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+         </div>
+      </div>
+    </ion-col>
+    
+  </ion-row>
+  
+</ion-grid>
+
+</ion-content>

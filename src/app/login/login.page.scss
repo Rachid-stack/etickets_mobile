@@ -1,0 +1,31 @@
+input{
+  border:solid 1px #666;border-radius:10px;
+  border-left: solid 3px red;
+}
+.form-control:focus{
+  border-color:red;
+  box-shadow: 0 0 0 0.2rem red;
+}
+label{
+  color:#666;
+  font-weight:700
+}
+.form-group .form-control {
+  padding-left: 2.375rem;
+}
+.form-group{
+position:relative;
+}
+.form-group .form-control-icon {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+  left:0;
+  top: 0px;
+}
